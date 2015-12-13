@@ -40,8 +40,8 @@ update action model =
     Update operation ->
       model
 
-foo : Command -> String -> String -> Operation
-foo command start end =
+composeOperation : Command -> String -> String -> Operation
+composeOperation command start end =
   let
     start' = splitLocation start
     end' = splitLocation end
@@ -80,8 +80,8 @@ parseOperation input =
     words = Array.fromList (String.words input)
   in
     if String.startsWith "turn on" input then
-      foo TurnOn (snagWord 2 words) (snagWord 4 words)
+      composeOperation TurnOn (snagWord 2 words) (snagWord 4 words)
     else if String.startsWith "turn off" input then
-      foo TurnOff (snagWord 2 words) (snagWord 4 words)
+      composeOperation TurnOff (snagWord 2 words) (snagWord 4 words)
     else
-      foo Toggle (snagWord 1 words) (snagWord 3 words)
+      composeOperation Toggle (snagWord 1 words) (snagWord 3 words)
