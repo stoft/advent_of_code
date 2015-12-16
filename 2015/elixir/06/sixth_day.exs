@@ -49,6 +49,12 @@ defmodule SixthDay do
     |> Enum.count
   end
 
+  def count_brightness(lights) do
+    lights
+    |> Enum.reduce([], fn {key,val} -> val end)
+    |> Enum.sum
+  end
+
   defp do_instruction(lights, {from, to, op} = instruction) do
     list = generate_light_list {from, to}
     Enum.reduce(list, lights, fn {k,v}, acc ->
@@ -63,7 +69,7 @@ defmodule SixthDay do
   end
 
   def generate_light_list() do
-    generate_light_list({{0,999},{0,999}})
+    generate_light_list({{0,0},{999,999}})
   end
 
   def generate_light_list({{x1,y1}, {x2,y2}}) do
